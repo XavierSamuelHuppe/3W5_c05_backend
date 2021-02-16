@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  checkoutAndTest:
+    docker:
+      - image: cimg/node:15.8.0
+    steps:
+      - run: git clone https://github.com/XavierSamuelHuppe/3p5-c3-backend.git
+      - run: git clone https://github.com/XavierSamuelHuppe/3p5-c3-frontend.git
+      - run: cd 3p5-c3-frontend && npm install
+      - run: cd 3p5-c3-frontend && npm run build
+      - run: cp -r ./3p5-c3-frontend/build ./3p5-c3-backend
+      - run: cd 3p5-c3-backend && ls
+
+workflows:
+  build:
+    jobs:
+      - checkoutAndTest
