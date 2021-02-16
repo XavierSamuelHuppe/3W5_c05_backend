@@ -1,0 +1,17 @@
+orbs:
+  node: circleci/node@4.1.0
+
+version: 2.1
+
+jobs:
+  checkoutAndTest:
+    docker:
+      - image: cimg/node:15.8.0
+    steps:
+      - checkout
+      - run: ls
+
+workflows:
+  app-tests:
+    jobs:
+      - checkoutAndTest
